@@ -45,20 +45,22 @@
       setup() {
         const questions = [
           'How much is 2+2',
-          'How much is 3*5+1',
-          'What is the rest from 3/1'
+          'How much is 3+1',
+          'How much is 5+1'
         ];
         const answers = [
           '4',
-          '16',
-          '1'
+          '4',
+          '6'
         ];
         const score = ref(0)
         const current = ref(0)
         const answer = ref(null)
+
         const question = computed(() => questions[current.value]);
 
         const rightAnswer = computed(() => answers[current.value]);
+
         const areWeDone = computed(() => questions.length == current.value);
         // This function does the actual check
         // 1) Is the currently entered answer the expected one?
@@ -70,14 +72,14 @@
             console.log("check")
           // Checking if the answer is correct here?
           if (answer.value === rightAnswer.value) {
-            // What should happen if the answer is right?
+            score.value++;
           }
 
-          ; // What should happen with the currently entered answer?
-          ; // What about current question?
+          answer.value = null // What should happen with the currently entered answer?
+          current.value++ // What about current question?
           // Should we check for something else, is this a last question maybe?
-          if (true === true) {
-            // What needs to happen here if that's the last question?
+          if (areWeDone.value) {
+            clearInterval()
           }
         }
         // Starting the interval
